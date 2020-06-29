@@ -1,5 +1,5 @@
 import java.util.Arrays;
-//Test
+
 public class TreePrint {
 
 	public int[] theArray;
@@ -38,28 +38,43 @@ public class TreePrint {
 		
 	}
 	
-	public void printTree() {
-		
-		
-	}
-	
-	
-	public int numRows() {
-		
-		int rows = 0;		
+	public void printTree(Node root) {
 		int counter = 0;
+		Node hold = root;
+		int NumSpaces = 5;
 		
-		while(counter <= arraySize) {
+		while(counter <= NumSpaces) {
 			
-			counter = (counter * 2) + 1;
+			if(hold == root) {
+				for(int i = 0; i < NumSpaces; i++) {
+					
+					System.out.print(" ");
+					
+				}
+				
+				System.out.print(hold.value + "\n");
+				counter++;
+				hold = hold.left;
+				continue;
+			}
 			
-			rows++;
+			else {
+				
+				if(hold != null) {
+					
+					
+					
+					
+					
+					
+				}
+				
+			}
 			
 		}
 		
-		return rows;
-		
 	}
+	
 	
 	
 	class BinaryTree{
@@ -83,7 +98,7 @@ public class TreePrint {
 			
 			if(root == null) {
 				
-				root.value = array[i];
+				root = new Node(array[i]);
 				makeTree(i + 1, root, root);
 				
 			}
@@ -124,12 +139,22 @@ public class TreePrint {
 			
 			
 		}
-		 
-		
-		public boolean moreThanTwo(Node test) {
+		//This modifies the array instance in class Binary tree. So only run after binary tree
+		//is made. 
+		public void levelOrderArray(Node root, int index) {
+			if(root == null) {
+				return;
+			}
+			array[index] = root.value;
+			levelOrderArray(root.left, index++);
+			levelOrderArray(root.right, index++);
 			
-			Node current = test;
-			return false;
+		}
+		
+		//This turns the tree into a full AVL tree. Only use once tree object is established
+		public void completeTree(Node root) {
+			
+			
 			
 		}
 		
@@ -161,11 +186,15 @@ public class TreePrint {
 		
 		int[] treeToPrint = {5, 1, 76, 22, 13, 12, 75, 7, 9, 44};
 		
-		TreePrint tree = new TreePrint(treeToPrint);
+		TreePrint t = new TreePrint(treeToPrint);
 		
 		//System.out.println(tree.numRows());
 		
-		tree.printArray();
+		t.printArray();
+		
+		t.tree.levelOrderArray(t.tree.root, 0);
+		
+		t.printArray();
 		
 	}
 	
