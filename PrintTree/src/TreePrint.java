@@ -88,6 +88,7 @@ public class TreePrint {
 		int[] array;
 		
 		
+		//the Binary Tree constructor
 		BinaryTree(int[] array){
 		
 		this.array = array;
@@ -98,50 +99,56 @@ public class TreePrint {
 		}
 		
 		
+		//After everyInsertion run the balance algoritim that will come down from the root
 		public void makeTree(int i, Node current, Node parent) {
 			
 			if(i == array.length) return;
 			
-			if(root == null) {
+				if(root == null) {
 				
-				root = new Node(array[i]);
-				makeTree(i + 1, root, root);
-				
-			}
-			
-			else if(array[i] <  current.value) {
-				
-				if(current.left == null) {
-					
-					current.left = new Node(array[i]);
-					
+					root = new Node(array[i]);
 					makeTree(i + 1, root, root);
-					
-				}
 				
-				else {
-					
-					makeTree(i, current.left, current);
-					
 				}
-			}
 			
-			else if(array[i] >  current.value) {
+				else if(array[i] <  current.value) {
 				
-				if(current.right == null) {
+					if(current.left == null) {
 					
-					current.right = new Node(array[i]);
+						current.left = new Node(array[i]);
 					
-					makeTree(i + 1, root, root);
-					
-				}
+						makeTree(i + 1, root, root);
+						
+					}
 				
-				else {
+					else {
 					
-					makeTree(i, current.right, current);
+						makeTree(i, current.left, current);
 					
+					}
 				}
-			}
+			
+				else if(array[i] >  current.value) {
+				
+					if(current.right == null) {
+					
+						current.right = new Node(array[i]);
+					
+						makeTree(i + 1, root, root);
+					
+					}
+				
+					else {
+					
+						makeTree(i, current.right, current);
+					
+					}
+				}
+				else makeTree(i, current.left, current); 
+			
+			//Reblance section
+			
+			//if theArray[i] < node && balance <> -1 or 1 etc...
 			
 			
 		}
@@ -170,13 +177,67 @@ public class TreePrint {
 			
 			if(current == null) {
 				
-				return 0;
+				return -1;
 				
 			}
 			
 			return 1 + Math.max(findHeight(current.left), findHeight(current.right));
 			
 		}
+		
+		
+		public int balanceFactor(Node current) {
+			
+			if(current == null) {
+				
+				return 0;
+				
+			}
+			return findHeight(current.left) - findHeight(current.right);
+			
+		}
+		
+		
+		//always start the rebalance one level down from the root
+		public void rebalanceTree(Node root) {
+			
+			if(root == null) return;
+			
+			// left left case
+			if(balanceFactor(root) > 1) {
+				
+				
+				
+			}
+			
+		}
+		
+		
+		public Node rightRotation(Node current) {
+			Node left = current.left;
+			Node leftRight = left.right;
+			
+			left.right = current;
+			current.left = leftRight;
+			
+			//Return the root of the subTree
+			return left;
+		}
+		
+		public Node leftRotation(Node current) {
+			Node right = current.right;
+			Node rightLeft = right.left;
+			
+			right.left = current;
+			current.left = rightLeft;
+			
+			return right;
+			
+		}
+		
+		
+		
+		
 		
 		public Node find(int nodeVal) {
 			
@@ -210,7 +271,7 @@ public class TreePrint {
 	
 	public static void main (String args[]) {
 		
-		int[] treeToPrint = {5, 1, 76, 22, 13, 12, 75, 7, 9, 44};
+		int[] treeToPrint = {29, 14, 47, 22, 13, 36, 75, 2, 31, 44};
 		
 		TreePrint t = new TreePrint(treeToPrint);
 		
@@ -225,6 +286,10 @@ public class TreePrint {
 		t.sortArray();
 		
 		t.printArray();
+		
+		System.out.println(t.tree.findHeight(t.tree.root));
+		
+		System.out.println(t.tree.balanceFactor(t.tree.root));
 		
 	}
 	
