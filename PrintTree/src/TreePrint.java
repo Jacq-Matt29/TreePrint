@@ -75,6 +75,12 @@ public class TreePrint {
 		
 	}
 	
+	public void sortArray() {
+		
+		Arrays.sort(theArray);
+		
+	}
+	
 	
 	
 	class BinaryTree{
@@ -152,9 +158,29 @@ public class TreePrint {
 		}
 		
 		//This turns the tree into a full AVL tree. Only use once tree object is established
-		public void completeTree(Node root) {
+		public void completeTree(Node current) {
+			int leftValue = 0;
+			int rightValue = 0;
 			
+			//findBalance for right and left for each node
 			
+		}
+		
+		public int findHeight(Node current) {
+			
+			if(current == null) {
+				
+				return 0;
+				
+			}
+			
+			return 1 + Math.max(findHeight(current.left), findHeight(current.right));
+			
+		}
+		
+		public Node find(int nodeVal) {
+			
+			return null;
 			
 		}
 		
@@ -193,6 +219,10 @@ public class TreePrint {
 		t.printArray();
 		
 		t.tree.levelOrderArray(t.tree.root, 0);
+		
+		t.printArray();
+		
+		t.sortArray();
 		
 		t.printArray();
 		
