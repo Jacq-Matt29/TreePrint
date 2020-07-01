@@ -1,5 +1,7 @@
 import java.util.Arrays;
 
+//The class that takes the array, uses the binary tree class to create the binary tree and has the print
+//print functions to print the tree
 public class TreePrint {
 
 	public int[] theArray;
@@ -38,42 +40,18 @@ public class TreePrint {
 		
 	}
 	
-	public void printTree(Node root) {
-		int counter = 0;
-		Node hold = root;
-		int NumSpaces = 5;
+	public boolean printTree(Node root, int level) {
+			
+		if(root == null) return true;
 		
-		while(counter <= NumSpaces) {
-			
-			if(hold == root) {
-				for(int i = 0; i < NumSpaces; i++) {
-					
-					System.out.print(" ");
-					
-				}
-				
-				System.out.print(hold.value + "\n");
-				counter++;
-				hold = hold.left;
-				continue;
-			}
-			
-			else {
-				
-				if(hold != null) {
-					
-					
-					
-					
-					
-					
-				}
-				
-			}
-			
-		}
-		
+		tree.printNodeLevel(root, level);
+		level++;
+		tree.printNodeLevel(root.left, level);
+		tree.printNodeLevel(root.right, level);
+		level++;
+		return printTree(root.left, level) && printTree(root.right, level);
 	}
+	
 	
 	public void sortArray() {
 		
@@ -83,6 +61,8 @@ public class TreePrint {
 	
 	
 	
+	
+	//The class that holds the binary tree
 	class BinaryTree{
 		Node root;
 		int[] array;
@@ -152,24 +132,38 @@ public class TreePrint {
 			
 			
 		}
-		//This modifies the array instance in class Binary tree. So only run after binary tree
-		//is made. 
-		public void levelOrderArray(Node root, int index) {
-			if(root == null) {
-				return;
-			}
-			array[index] = root.value;
-			levelOrderArray(root.left, index++);
-			levelOrderArray(root.right, index++);
-			
-		}
 		
 		//This turns the tree into a full AVL tree. Only use once tree object is established
-		public void completeTree(Node current) {
+		/*public void completeTree(Node current) {
 			int leftValue = 0;
 			int rightValue = 0;
 			
 			//findBalance for right and left for each node
+			
+		}*/
+		
+		public void printNodeLevel(Node root, int level) {
+			
+				if(level == 0) {
+					
+					System.out.println(root.value);
+					System.out.println(root.left.value + "  " + root.right.value);
+					
+				}
+				else {
+					
+					if(root.left != null) {
+						
+						System.out.print(root.left.value + "  ");
+					
+					}
+					
+					if(root.right != null) {
+						
+						System.out.print(root.right.value + "    ");
+					
+					}
+				}
 			
 		}
 		
@@ -199,7 +193,7 @@ public class TreePrint {
 		
 		
 		//always start the rebalance one level down from the root
-		public void rebalanceTree(Node root) {
+		/*public void rebalanceTree(Node root) {
 			
 			if(root == null) return;
 			
@@ -210,7 +204,7 @@ public class TreePrint {
 				
 			}
 			
-		}
+		}*/
 		
 		
 		public Node rightRotation(Node current) {
@@ -239,11 +233,11 @@ public class TreePrint {
 		
 		
 		
-		public Node find(int nodeVal) {
+		/*public Node find(int nodeVal) {
 			
 			return null;
 			
-		}
+		}*/
 		
 		
 	}
@@ -279,10 +273,6 @@ public class TreePrint {
 		
 		t.printArray();
 		
-		t.tree.levelOrderArray(t.tree.root, 0);
-		
-		t.printArray();
-		
 		t.sortArray();
 		
 		t.printArray();
@@ -290,6 +280,10 @@ public class TreePrint {
 		System.out.println(t.tree.findHeight(t.tree.root));
 		
 		System.out.println(t.tree.balanceFactor(t.tree.root));
+		
+		System.out.println("----------Tree Print Test -------------");
+		
+		t.printTree(t.tree.root, 0);
 		
 	}
 	
