@@ -40,16 +40,43 @@ public class TreePrint {
 		
 	}
 	
+	public boolean printTreeLoop(Node root, int level) {
+		int i = level;
+		
+		for(i = 0; i <5; i++) {
+			if(i == 0) {
+				
+				tree.printNodeLevel(root, i);
+				i++;
+				
+			}
+			else {
+				
+				tree.printNodeLevel(root.left, level);
+				tree.printNodeLevel(root.right, level);
+			}
+			
+		}
+		
+		return true;
+	}
+	
 	public boolean printTree(Node root, int level) {
 			
 		if(root == null) return true;
 		
-		tree.printNodeLevel(root, level);
-		level++;
-		tree.printNodeLevel(root.left, level);
-		tree.printNodeLevel(root.right, level);
-		level++;
-		return printTree(root.left, level) && printTree(root.right, level);
+		if(level == 0) {
+			tree.printNodeLevel(root, level);
+			level++;
+			}
+
+		//tree.printNodeLevel(root.left, level);
+		//tree.printNodeLevel(root.right, level);
+		//If the child is null or the 
+		Node holder = root.right;
+		root = root.left;
+		System.out.print("\n");
+		return printTree(root, level) && printTree(holder, level);
 	}
 	
 	
@@ -151,7 +178,9 @@ public class TreePrint {
 					
 				}
 				else {
-					
+					if(root == null) {
+						return;
+					}
 					if(root.left != null) {
 						
 						System.out.print(root.left.value + "  ");
@@ -286,9 +315,5 @@ public class TreePrint {
 		t.printTree(t.tree.root, 0);
 		
 	}
-	
-	
-	
-	
 	
 }
