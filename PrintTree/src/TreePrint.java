@@ -42,12 +42,28 @@ public class TreePrint {
 	
 	
 	public void printTree(Node root) {
-		int level = 0;
 		
-		for(int i = 0; i < 5; i++) {
+		int height = tree.findHeight(root);
+		int spaceCnt = height * 7;
+		int factor = 3;
+		
+		for(int i = 0; i <= height; i++) {
+				
+			for(int j = 0; j <= spaceCnt; j++) {
+				
+				System.out.print(" ");
+				
+			}
 			
-				tree.printNodeLevel(root, i);
-				System.out.println();
+			//spaceCnt = (int) (spaceCnt - (2 * factor));
+			//factor = factor + .4;
+			spaceCnt = spaceCnt - factor;
+					
+			tree.printNodeLevel(root, i);
+				
+			System.out.println();
+			System.out.println(); 
+			System.out.println();
 			
 		}
 		
@@ -166,13 +182,15 @@ public class TreePrint {
 				}
 				if(level == 0) {
 					
-					System.out.print(root.value + "  ");
+					System.out.print(root.value + "    ");
 					
 				}
 				else {
 					level--;
 					printNodeLevel(root.left, level);
+					if(root.left == null) System.out.print("  ");
 					printNodeLevel(root.right, level);
+					if(root.right == null) System.out.print("  ");
 					
 				}
 			
@@ -182,7 +200,7 @@ public class TreePrint {
 			
 			if(current == null) {
 				
-				return -1;
+				return 0;
 				
 			}
 			
@@ -211,7 +229,7 @@ public class TreePrint {
 			// left left case
 			if(balanceFactor(root) > 1) {
 				
-				
+				  
 				
 			}
 			
@@ -295,6 +313,7 @@ public class TreePrint {
 		System.out.println("----------Tree Print Test -------------");
 		
 		t.printTree(t.tree.root);
+		
 		
 	}
 	
