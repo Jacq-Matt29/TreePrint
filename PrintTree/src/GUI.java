@@ -1,39 +1,43 @@
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 
 public class GUI extends JFrame {
 
 	public JButton importArray;
 	public JButton printTree;
+	public JTextField treeContainer;
+	public JButton label;
 	
 	public GUI() {
 	
-		setPreferredSize(new Dimension(700, 700));
+		setPreferredSize(new Dimension(1000, 600));
+		setLocation(150, 100);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setTitle("GUI trial");;
+		setTitle("Tree GUI");
+
+		JPanel mainPanel = new JPanel();
 		
-		JPanel panel = new JPanel();
-		
+		treeContainer = new JTextField(10);
 		importArray = new JButton("Import array");
-		printTree = new JButton("Print Binary Tree");
-		importArray.setBounds(20, 20, 160, 30);
-		printTree.setBounds(20, 20, 160, 30);
+		//printTree = new JButton("Print Binary Tree");
+		//label = new JButton("Array to Binary Tree");
 		
-		panel.add(importArray);
-		panel.add(printTree);
+		mainPanel.add(treeContainer);
+		//panel.add(label);
+		//panel.add(printTree);
+		//panel.add(importArray);
 		
-		this.getContentPane().add(panel);
-		pack();
+		setContentPane(mainPanel);
 		setVisible(true);
-		
-		//int[] arr = {33, 17, 44, 2, 4, 99, 86};
-		//TreePrint tree = new TreePrint(arr);
-		
+		pack();
 		
 	}
 	
